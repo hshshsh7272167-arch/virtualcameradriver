@@ -1,0 +1,95 @@
+<Window x:Class="VirtualCameraDriver.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Virtual Camera Driver - Static Image Stream" Height="500" Width="600"
+        Background="#F0F0F0" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
+            
+            <!-- Title -->
+            <TextBlock Text="Virtual Camera Driver" 
+                       FontSize="28" FontWeight="Bold" 
+                       Foreground="#333333" TextAlignment="Center"/>
+            
+            <TextBlock Text="Gallery Image को Camera की तरह Stream करें" 
+                       FontSize="14" Foreground="#666666" TextAlignment="Center"/>
+            
+            <!-- Status Display -->
+            <Border Background="White" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Padding="15">
+                <StackPanel>
+                    <TextBlock Text="स्थिति:" FontWeight="Bold" Foreground="#333333"/>
+                    <TextBlock x:Name="StatusText" Text="कोई image select नहीं किया गया" 
+                               Foreground="#666666" Margin="0,5,0,0"/>
+                    <TextBlock x:Name="SelectedImagePath" Text="" 
+                               Foreground="#999999" FontSize="11" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+            
+            <!-- Image Preview -->
+            <Border Background="White" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Height="150">
+                <Image x:Name="ImagePreview" Stretch="UniformToFill"/>
+            </Border>
+            
+            <!-- Buttons -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="15">
+                
+                <!-- Select Image Button -->
+                <Button x:Name="SelectImageBtn" Click="SelectImageBtn_Click"
+                        Background="#4CAF50" Foreground="White"
+                        Padding="20,10" FontSize="14" FontWeight="Bold"
+                        Cursor="Hand" Width="150">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" 
+                                    CornerRadius="5" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    📁 Image Select करें
+                </Button>
+                
+                <!-- Start Streaming Button -->
+                <Button x:Name="StartStreamBtn" Click="StartStreamBtn_Click"
+                        Background="#2196F3" Foreground="White"
+                        Padding="20,10" FontSize="14" FontWeight="Bold"
+                        Cursor="Hand" Width="150">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" 
+                                    CornerRadius="5" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    ▶️ Streaming शुरू करें
+                </Button>
+                
+                <!-- Stop Streaming Button -->
+                <Button x:Name="StopStreamBtn" Click="StopStreamBtn_Click"
+                        Background="#F44336" Foreground="White"
+                        Padding="20,10" FontSize="14" FontWeight="Bold"
+                        Cursor="Hand" Width="150" IsEnabled="False">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" 
+                                    CornerRadius="5" Padding="{TemplateBinding Padding}"
+                                    Opacity="{TemplateBinding IsEnabled, Converter={StaticResource BoolToOpacityConverter}}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    ⏹️ Streaming बंद करें
+                </Button>
+                
+            </StackPanel>
+            
+            <!-- Info -->
+            <Border Background="#E3F2FD" BorderBrush="#2196F3" BorderThickness="1" CornerRadius="5" Padding="15">
+                <TextBlock Text="💡 Tip: Streaming शुरू करने के बाद किसी भी video call app (Zoom, Teams, Meet) में जाएं और camera settings में 'VirtualCameraDriver' को select करें।" 
+                           Foreground="#1565C0" TextWrapping="Wrap" FontSize="12"/>
+            </Border>
+            
+        </StackPanel>
+    </Grid>
+</Window>
